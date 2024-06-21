@@ -37,6 +37,41 @@ const checkuser = async(email)=> {
     console.log(password);
         return password
     }
+// Music
+
+const getmuiscs = async() => {
+    const [music] = await pool.query("SELECT * FROM music");
+    return music
+}
+
+const getmusic = async(id) => {
+    const [music] = await pool.query("SELECT * FROM music WHERE id = ?", [id]);
+    return music
+}
+
+const addmusic = async(title,duration,song_path,image,user_id)=>{
+    const [result] = await pool.query(`
+    insert into music (title,duration,song_path,image,user_id) values (?,?,?,?,?)
+    `,[title,duration,song_path,image,user_id] 
+    ) 
+    return result
+}
+
+const updatemusic = async(title,duration,song_path,image,id) => {
+    const [music]  = await pool.query(`
+        UPDATE music SET title =?, duration =?, song_path =?, image =? WHERE id =?
+    `, [title,duration,song_path,image,id])
+    return music
+}
+
+const deletemusic = async(id)=> {
+    const [music]  = await pool.query(`
+        DELETE FROM music WHERE  id=?
+    `, [id])
+    return music
+}
 
 
-    export default {checkuser, deleteuser,updateuser, addusers,getuser,getusers}
+
+
+    export default {checkuser, deleteuser,updateuser, addusers,getuser,getusers,getmuiscs,getmusic,addmusic,deletemusic,updatemusic}
