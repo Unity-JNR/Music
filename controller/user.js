@@ -1,4 +1,4 @@
-import { deleteuser,updateuser, addusers,getuser,getusers} from "../models/database.js";
+import { deleteuser, updateuser, addusers, getuser, getusers } from '../models/database.js';
 import bcrpt from 'bcrypt';
 
 export default {

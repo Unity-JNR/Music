@@ -1,9 +1,10 @@
-import { getmuiscs,getmusic,addmusic,deletemusic,updatemusic} from "../models/database.js";
-import bcrpt from 'bcrypt';
+import { getmusics, getmusic, addmusic, deletemusic, updatemusic } from "../models/database.js";
+
+
 
 export default {
     getallsongs: async (req,res) => {
-        res.send(await getmuiscs())
+        res.send(await getmusics())
     },
     getsong: async (req,res) => {
         res.send(await getmusic(req.params.id))

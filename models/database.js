@@ -1,4 +1,5 @@
 import { pool } from "../config/config.js";
+// import user from "../controller/user.js";
 
 const getusers = async() => {
     const [users] = await pool.query("SELECT * FROM users");
@@ -7,7 +8,7 @@ const getusers = async() => {
 const addusers = async(username,email,password) => {
     const [result] = await pool.query(`
     insert into users (username,email,password) values (?,?,?,?);
-    `,[username,email,password,role] 
+    `,[username,email,password] 
     ) 
     return result 
 }
@@ -37,9 +38,16 @@ const checkuser = async(email)=> {
     console.log(password);
         return password
     }
+
+    const loggeduser =  async(email)=> {
+        const [[user]]= await pool.query(`
+        SELECT * From users WHERE email = ?`,[email])
+        console.log(user);
+            return user
+        }
 // Music
 
-const getmuiscs = async() => {
+const getmusics = async() => {
     const [music] = await pool.query("SELECT * FROM music");
     return music
 }
@@ -74,4 +82,17 @@ const deletemusic = async(id)=> {
 
 
 
-    export default {checkuser, deleteuser,updateuser, addusers,getuser,getusers,getmuiscs,getmusic,addmusic,deletemusic,updatemusic}
+export  {
+    checkuser,
+    deleteuser,
+    updateuser,
+    addusers,
+    getuser,
+    getusers,
+    getmusics, // Fixed typo here
+    getmusic,
+    addmusic, // Fixed export name here
+    deletemusic,
+    updatemusic,
+    loggeduser
+};
